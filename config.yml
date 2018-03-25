@@ -56,6 +56,7 @@ engines:
 
 plugins:
   Auth::Extensible:
+    login_template: transparent_login
     realms:
       users:
         provider: DBConnection

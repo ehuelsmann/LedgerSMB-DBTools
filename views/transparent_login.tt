@@ -1,0 +1,23 @@
+<h1>Login Required</h1>
+ 
+<p>You need to log in to continue.</p>
+ 
+<%- IF login_failed -%>
+  <p>LOGIN FAILED</p>
+<%- END -%>
+ 
+<form method="post">
+  <label for="username">Username:</label>
+  <input type="text" name="__auth_extensible_username" id="username">
+  <br />
+  <label for="password">Password:</label>
+  <input type="password" name="__auth_extensible_password" id="password">
+  <br />
+
+  <label for="database">Database:</label>
+  <input type="text" name="__auth_extensible_database" id="database">
+  <br />
+
+  <input type="submit" value="Login">
+</form>
+ 

@@ -16,19 +16,17 @@ sub authenticate_user {
    croak "username and password must be defined"
      unless defined $username and defined $password;
 
+   my $dbname = $self->plugin->app->request->body_parameters->get('__auth_extensible_database');
    croak "session doesn't contain database name for auth"
-     unless defined $self->app->session->read('dbname');
+     unless defined $dbname;
 
-print STDERR "\n\n\nhere!!\n\n\n";
    my $dbh;
-#   session->write('dbname', 'postgres');
-print STDERR "\n\n\nhere2!!\n\n\n";
    try {
-     $dbh = DBI->connect('dbi:Pg:host=postgres;dbname=postgres', # . session->read('dbname'),
-             $username, $password);
-     print STDERR DBI->errstr . "\n\n";
+     $dbh = DBI->connect('dbi:Pg:host=postgres;dbname=' . $dbname, $username, $password);
    };
 
-print STDERR "authenticated: " . (defined $dbh ? "yes" : "no") . "\n\n";   
+   if (defined $dbh) {
+      $self->plugin->app->session->write(
+
    return defined $dbh;
 }
