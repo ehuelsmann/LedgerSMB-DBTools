@@ -26,7 +26,12 @@ sub authenticate_user {
    };
 
    if (defined $dbh) {
-      $self->plugin->app->session->write(
+      my $session = $self->plugin->app->session;
+      $session->write('__auth_extensible_database', $dbname);
+      $session->write('__auth_extensible_pass', $password);
 
-   return defined $dbh;
+      return 1;
+   }
+
+   return 0;
 }
