@@ -2,9 +2,9 @@
  
 <p>You need to log in to continue.</p>
  
-<%- IF login_failed -%>
+[%- IF login_failed -%]
   <p>LOGIN FAILED</p>
-<%- END -%>
+[%- END -%]
  
 <form method="post">
   <label for="username">Username:</label>

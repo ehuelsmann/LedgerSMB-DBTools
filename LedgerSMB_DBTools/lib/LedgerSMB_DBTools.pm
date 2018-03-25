@@ -9,4 +9,9 @@ get '/' => require_login sub {
     template 'index' => { 'title' => 'LedgerSMB_DBTools' };
 };
 
+get '/remove-invoice' => require_login sub {
+    template 'remove-invoice' => { 'title' => 'LedgerSMB_DBTools' };
+};
+
+
 true;

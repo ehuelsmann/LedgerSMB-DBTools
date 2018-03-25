@@ -1,0 +1,23 @@
+version: "3.2"
+services:
+  db:
+    image: ledgersmb/ledgersmb-dev-postgres
+    environment:
+      POSTGRES_PASSWORD: abc
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+  lsmb:
+    depends_on:
+      - db
+    image: lsmb-dbtool
+    links:
+      - "db:postgres"
+    volumes:
+      - type: bind
+        target: /srv
+        source: ${PWD}
+
+volumes:
+  dbdata:
+

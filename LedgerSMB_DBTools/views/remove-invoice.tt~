@@ -1,0 +1,24 @@
+
+<div id="page">
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <h3>Database surgery</h3>
+            <ul class="links">
+
+              <li><a href="remove-invoice">Remove invoice</a></li>
+            </ul>
+          </li>
+
+       </ul>
+
+      </div>
+
+      <div id="content">
+       <div id="header">
+          <h1>LedgerSMB</h1>
+          <h2>Remove an invoice from the database</h2>
+        </div>
+
+
+    </div>
