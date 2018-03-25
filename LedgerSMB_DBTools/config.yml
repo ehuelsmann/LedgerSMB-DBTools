@@ -60,4 +60,5 @@ plugins:
     realms:
       users:
         provider: DBConnection
-
+  SessionDatabase:
+    host: postgres
