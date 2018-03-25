@@ -17,7 +17,7 @@ sub authenticate_user {
      unless defined $username and defined $password;
 
    croak "session doesn't contain database name for auth"
-     unless defined $self->app->session->read('dbname');
+     unless defined session->read('dbname');
 
 print STDERR "\n\n\nhere!!\n\n\n";
    my $dbh;
