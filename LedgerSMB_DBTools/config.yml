@@ -39,13 +39,14 @@ template: "tiny"
 # Dancer apps on the same host then you will need to make sure 'cookie_name'
 # is different for each app.
 #
+session: Cookie
 engines:
   session:
     Cookie:
       secret_key: V9slW49T0WzHndRaLc56UeV6K87qRp1m
       default_duration: 604800
       with_request_address: 0
-#      cookie_name: testapp.session
+      cookie_name: testapp.session
 #
 #engines:
 #  session:
