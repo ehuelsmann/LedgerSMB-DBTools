@@ -14,7 +14,34 @@
 
 </head>
 <body>
-[% content %]
+  <div id="page">
+    [% IF session.logged_in_user %]
+      <div id="sidebar">
+        <ul id="sidebar-items">
+          <li>
+            <h3>Database surgery</h3>
+            <ul class="links">
+
+              <li><a href="remove-invoice">Remove invoice</a></li>
+            </ul>
+          </li>
+          <li>
+            <h3>Session</h3>
+            <ul class="links">
+
+              <li><a href="logout">Log out</a></li>
+            </ul>
+          </li>
+
+       </ul>
+
+      </div>
+
+      [% END %]
+
+      [% content %]
+
+  </div>
 <div id="footer">
 Powered by <a href="http://perldancer.org/">Dancer2</a> [% dancer_version %]
 </div>

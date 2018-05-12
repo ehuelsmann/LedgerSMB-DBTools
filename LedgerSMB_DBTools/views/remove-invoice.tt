@@ -1,25 +1,52 @@
 
-<div id="page">
-      <div id="sidebar">
-        <ul id="sidebar-items">
-          <li>
-            <h3>Database surgery</h3>
-            <ul class="links">
-
-              <li><a href="remove-invoice">Remove invoice</a></li>
-            </ul>
-          </li>
-
-       </ul>
-
-      </div>
 
       <div id="content">
        <div id="header">
           <h1>LedgerSMB</h1>
           <h2>Remove an invoice from the database</h2>
-        </div>
-      </div>
+       </div>
+       <form>
+         [% IF ! search %]
+         <div>
+           <label for="search">Search</label>
+           <input type="text" name="search" id="search">
+         </div>
+         [% ELSE %]
+         <div>
+           Search: [% search %]
+           <input type="hidden" name="search" value="[% search %]">
+         </div>
+         [% END %]
 
+         [% IF invoices %]
+         <table id="invoices">
+           <thead>
+             <tr>
+               <th>&nbsp;</th>
+               <th>id</th>
+               <th>invnumber</th>
+               <th>transdate</th>
+               <th>amount</th>
+             </tr>
+           </thead>
+           <tbody>
+             [% FOREACH invoice IN invoices %]
+             <tr>
+               <td><input type="radio" name="invid" value="[% invoice.id %]"></td>
+               <td>[% invoice.id %]</td>
+               <td>[% invoice.invnumber %]</td>
+               <td>[% invoice.transdate %]</td>
+               <td>[% invoice.amount %]</td>
+             </tr>
+             [% END %]
+           </tbody>
+         </table>
+         [% END %]
+
+         <div style="margin-top: 1em">
+           <input type="submit" id="submit" value="submit">
+         </div>
+      </form>
+      </div>
 
     </div>
