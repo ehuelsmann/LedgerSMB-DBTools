@@ -31,16 +31,112 @@
            </thead>
            <tbody>
              [% FOREACH invoice IN invoices %]
+             [% IF (!invid) || (invid == invoice.id) %]
              <tr>
+               [% IF invid && (invid == invoice.id) %]
+               <td><input type="radio" name="invid" value="[% invoice.id %]" checked="checked"></td>
+               [% ELSE %]
                <td><input type="radio" name="invid" value="[% invoice.id %]"></td>
+               [% END %]
                <td>[% invoice.id %]</td>
                <td>[% invoice.invnumber %]</td>
                <td>[% invoice.transdate %]</td>
                <td>[% invoice.amount %]</td>
              </tr>
              [% END %]
+             [% END %]
            </tbody>
          </table>
+
+         [% IF ledger_lines %]
+         <table id="ledgerlines">
+           <thead>
+             <tr>
+               <th>id</th>
+               <th>transdate</th>
+               <th colspan="2">accno</th>
+               <th>debit</th>
+               <th>credit</th>
+             </tr>
+           </thead>
+           <tbody>
+             [% FOREACH line IN ledger_lines %]
+             <tr>
+               <td>[% line.entry_id %]</td>
+               <td>[% line.transdate %]</td>
+               <td>[% line.accno %]</td>
+               <td>[% line.description %]</td>
+               <td>[% line.debit %]</td>
+               <td>[% line.credit %]</td>
+             </tr>
+             [% END %]
+           </tbody>
+         </table>
+
+
+         [% IF payments %]
+         <p>The selected invoice is affected by the payments in the table
+           below. The transactions and ledger lines involved in these
+           payments will need to be deleted in order to be able to delete
+           this invoice.
+         </p>
+         <table id="payments">
+           <caption>Affected payments</caption>
+           <thead>
+             <tr>
+               <th>id</th>
+               <th>reference</th>
+               <th>payment_date</th>
+               <th>amount</th>
+               <th>notes</th>
+             </tr>
+           </thead>
+           <tbody>
+             [% FOREACH payment IN payments %]
+             <tr>
+               <td>[% payment.id %]</td>
+               <td>[% payment.reference %]</td>
+               <td>[% payment.payment_date %]</td>
+               <td>[% payment.amount %]</td>
+               <td>[% payment.notes %]</td>
+             </tr>
+             [% END %]
+           </tbody>
+         </table>
+
+
+         [% IF affected_invoices %]
+         <p>The removal of the invoices and their payments are going to affect
+           the following invoices, which are included in the listed payments
+         </p>
+         <table id="affected_invoices">
+           <caption>Affected invoices</caption>
+           <thead>
+             <tr>
+               <th>invnumber</th>
+               <th>payment id</th>
+               <th>reference</th>
+               <th>payment_date</th>
+               <th>notes</th>
+             </tr>
+           </thead>
+           <tbody>
+             [% FOREACH invoice IN affected_invoices %]
+             <tr>
+               <td>[% invoice.invnum %]</td>
+               <td>[% invoice.id %]</td>
+               <td>[% invoice.reference %]</td>
+               <td>[% invoice.payment_date %]</td>
+               <td>[% invoice.notes %]</td>
+             </tr>
+             [% END %]
+           </tbody>
+         </table>
+
+
+         [% END %]
+         [% END %]
+         [% END %]
          [% END %]
 
          <div style="margin-top: 1em">
