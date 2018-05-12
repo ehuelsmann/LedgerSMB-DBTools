@@ -6,6 +6,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update && \
    lsb-release starman libdbd-pg-perl libdbi-perl libtemplate-perl \
    libplack-perl libclone-perl libyaml-perl libplack-middleware-fixmissingbodyinredirect-perl \
    libplack-middleware-removeredundantbody-perl libhttp-body-perl \
+   libtemplate-perl \
    cpanminus make gcc
 
 RUN cpanm --notest --quiet Dancer2

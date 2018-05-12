@@ -18,7 +18,10 @@ charset: "UTF-8"
 # simple: default and very basic template engine
 # template_toolkit: TT
 
-template: "tiny"
+template: "template_toolkit"
+#engines:
+#  template:
+#     template_toolkit:
 
 # template: "template_toolkit"
 # engines:
