@@ -10,7 +10,7 @@ services:
   lsmb:
     depends_on:
       - db
-    image: lsmb-dbtool
+    image: lsmb-dbtool:latest
     links:
       - "db:postgres"
     volumes:
