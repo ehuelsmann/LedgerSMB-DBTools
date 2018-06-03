@@ -15,9 +15,51 @@ get '/remove-invoice' => require_login sub {
     my $ledger_lines;
     my $affected_payments;
     my $affected_invoices;
+    my $deleted = 0;
     my $query;
 
-    if ( param('invid') ) {
+    if ( param('submit') &&
+         param('submit') eq 'delete' ) {
+        my $dbh = database;
+
+        $query = q{
+DELETE FROM invoice WHERE trans_id = ?
+};
+        $dbh->do($query, {}, param('invid'));
+        die $dbh->errstr
+            if $dbh->state;
+
+        $query = q{
+DELETE FROM acc_trans WHERE trans_id = ?
+};
+        $dbh->do($query, {}, param('invid'));
+        die $dbh->errstr
+            if $dbh->state;
+
+        $query = q{
+DELETE FROM ar WHERE id = ?
+};
+        $dbh->do($query, {}, param('invid'));
+        die $dbh->errstr
+            if $dbh->state;
+
+        $query = q{
+DELETE FROM ap WHERE id = ?
+};
+        $dbh->do($query, {}, param('invid'));
+        die $dbh->errstr
+            if $dbh->state;
+
+        $query = q{
+DELETE FROM transactions WHERE id = ?
+};
+        $dbh->do($query, {}, param('invid'));
+        die $dbh->errstr
+            if $dbh->state;
+
+        $deleted = 1;
+    }
+    elsif ( param('invid') ) {
         my $dbh = database;
 
         $query = q{

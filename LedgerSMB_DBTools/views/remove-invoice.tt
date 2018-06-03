@@ -5,6 +5,11 @@
           <h1>LedgerSMB</h1>
           <h2>Remove an invoice from the database</h2>
        </div>
+       [% IF deleted %]
+       <p>
+         Your invoice has succesfully been deleted.
+       </p>
+       [% ELSE %]
        <form>
          [% IF ! search %]
          <div>
@@ -140,9 +145,14 @@
          [% END %]
 
          <div style="margin-top: 1em">
-           <input type="submit" id="submit" value="submit">
+         [% IF invoices %]
+           <input type="submit" id="submit" name="submit" value="delete">
+         [% ELSE %]
+           <input type="submit" id="submit" name="submit" value="submit">
+         [% END %]
          </div>
       </form>
+      [% END %]
       </div>
 
     </div>
