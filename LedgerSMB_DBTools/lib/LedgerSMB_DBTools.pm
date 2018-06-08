@@ -23,6 +23,14 @@ get '/remove-invoice' => require_login sub {
         my $dbh = database;
 
         $query = q{
+DELETE FROM invoice_tax_form
+      WHERE invoice_id IN (select id from invoice where trans_id = ?)
+};
+        $dbh->do($query, {}, param('invid'));
+        die $dbh->errstr
+            if $dbh->state;
+
+        $query = q{
 DELETE FROM invoice WHERE trans_id = ?
 };
         $dbh->do($query, {}, param('invid'));
