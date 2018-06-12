@@ -31,9 +31,10 @@ DELETE FROM invoice_tax_form
             if $dbh->state;
 
         $query = q{
+UPDATE acc_trans SET invoice_id = NULL where trans_id = ?
 DELETE FROM invoice WHERE trans_id = ?
 };
-        $dbh->do($query, {}, param('invid'));
+        $dbh->do($query, {}, param('invid'), param('invid'));
         die $dbh->errstr
             if $dbh->state;
 
